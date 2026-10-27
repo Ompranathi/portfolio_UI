@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in | Pranathi Web Resume</title>
+    <meta name="description" content="Portfolio of Elisetty Om Pranathi — CSE student passionate about Web Development, AI, and Software Engineering.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ LOGIN GATE ============ -->
+<div class="login-gate" id="login-gate">
+
+  <!-- Decorative login background -->
+  <canvas id="particle-canvas" aria-hidden="true"></canvas>
+  <!-- Right-side ambient glow -->
+  <div class="login-bg-glow" aria-hidden="true"></div>
+  <div class="login-orb login-orb-one" aria-hidden="true"></div>
+  <div class="login-orb login-orb-two" aria-hidden="true"></div>
+
+  <div class="login-panel">
+
+    <div class="login-brand"><span class="login-brand-icon"><i class="fa-solid fa-code"></i></span><p class="login-brand-tag">PRANATHI <span>WEB RESUME</span></p></div>
+    <h1 class="login-heading">Welcome back</h1>
+    <p class="login-subtext">Sign in to continue to the portfolio.</p>
+
+    <!-- Google OAuth -->
+    <button id="auth-google" class="google-btn" type="button">
+      <svg width="20" height="20" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59a14.5 14.5 0 0 1 0-9.18l-7.98-6.19a24.1 24.1 0 0 0 0 21.56l7.98-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+      <span>Continue with Google</span>
+    </button>
+
+    <!-- Divider -->
+    <div class="login-divider">
+      <div class="divider-line"></div>
+      <span>or continue with email</span>
+      <div class="divider-line"></div>
+    </div>
+
+    <!-- Email / Password form -->
+    <form id="auth-login-form" autocomplete="off">
+      <div class="form-field">
+        <label for="auth-email">Email address</label>
+        <input id="auth-email" type="email" placeholder="you@example.com" autocomplete="email" required>
+      </div>
+
+      <div class="form-field">
+        <label for="auth-password">Password</label>
+        <div class="password-wrap">
+          <input id="auth-password" type="password" placeholder="Enter your password" autocomplete="current-password" minlength="8" required>
+          <button type="button" class="pw-toggle" id="toggle-pw" aria-label="Toggle password visibility">
+            <i class="fa-solid fa-eye"></i>
+          </button>
+        </div>
+      </div>
+
+      <button class="signin-btn" type="submit" id="login-submit">
+        <span class="btn-label">Sign in</span>
+        <i class="fa-solid fa-arrow-right btn-arrow"></i>
+        <span class="btn-loading" hidden>
+          <i class="fa-solid fa-circle-notch fa-spin"></i>
+          Signing in…
+        </span>
+      </button>
+    </form>
+
+    <a href="#" class="forgot-link" id="forgot-link">Forgot password?</a>
+
+    <p class="register-text">
+      <span id="register-prompt">Don't have an account?</span>
+      <a href="#" class="register-link" id="auth-register">Create one</a>
+    </p>
+
+    <!-- Status message -->
+    <p id="auth-message" class="login-msg" role="status" aria-live="polite"></p>
+
+  </div>
+</div>
+
+<!-- ============ PORTFOLIO ============ -->
+<div class="portfolio" id="portfolio" hidden>
+
+  <!-- Sticky header -->
+  <header id="site-header">
+    <nav>
+      <a href="#home" class="logo">
+        <span class="logo-icon"><i class="fa-solid fa-terminal"></i></span>
+        <span>Portfolio</span>
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul id="nav-menu">
+        <li><a href="#home" class="nav-link active">Home</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#education" class="nav-link">Education</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+        <li><a href="#" class="nav-link logout-link" id="auth-logout-link">Logout</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="hero-particles" id="hero-particles"></div>
+    <div class="hero-content reveal">
+      <p class="hero-greeting">Hello, I'm</p>
+      <h1 class="hero-name">
+        Elisetty
+        <span class="hero-accent"> Om Pranathi</span>
+        <span class="typed-cursor">|</span>
+      </h1>
+      <p class="hero-tagline" id="hero-tagline"></p>
+      <div class="hero-cta">
+        <a href="#contact" class="btn-primary"><i class="fa-solid fa-paper-plane"></i> Contact Me</a>
+        <a href="#projects" class="btn-outline"><i class="fa-solid fa-folder-open"></i> View Projects</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-num" data-count="8.73">0</span><span class="stat-label">CGPA</span></div>
+        <div class="stat"><span class="stat-num" data-count="5">0</span><span class="stat-label">Skills</span></div>
+        <div class="stat"><span class="stat-num" data-count="1">0</span><span class="stat-label">Projects</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <h2 class="section-title reveal"><span>About</span> Me</h2>
+    <div class="about-grid reveal">
+      <div class="about-card">
+        <div class="about-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+        <h3>Education</h3>
+        <p>Integrated M.Tech in CSE at VIT Amaravati</p>
+      </div>
+      <div class="about-card">
+        <div class="about-icon"><i class="fa-solid fa-code"></i></div>
+        <h3>Developer</h3>
+        <p>Passionate about web dev, AI & software engineering</p>
+      </div>
+      <div class="about-card">
+        <div class="about-icon"><i class="fa-solid fa-lightbulb"></i></div>
+        <h3>Innovator</h3>
+        <p>Love solving real-world problems through technology</p>
+      </div>
+    </div>
+    <p class="about-text reveal">
+      I am pursuing my Integrated M.Tech in Computer Science Engineering at
+      VIT Amaravati with a CGPA of 8.73/10.
+      I am passionate about solving real-world problems through software
+      development, AI and web technologies. I enjoy learning new technologies
+      and working on practical projects.
+    </p>
+  </section>
+
+  <!-- Education -->
+  <section id="education">
+    <h2 class="section-title reveal"><span>My</span> Education</h2>
+    <div class="timeline reveal">
+      <div class="timeline-item">
+        <div class="timeline-dot"><i class="fa-solid fa-university"></i></div>
+        <div class="timeline-card">
+          <span class="timeline-badge">2023 – 2028</span>
+          <h3>Integrated M.Tech — Computer Science Engineering</h3>
+          <p class="timeline-school"><i class="fa-solid fa-location-dot"></i> VIT Amaravati</p>
+          <div class="timeline-cgpa">
+            <span>CGPA</span>
+            <div class="progress-bar"><div class="progress-fill" data-width="87.3"></div></div>
+            <span class="cgpa-val">8.73 / 10</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills">
+    <h2 class="section-title reveal"><span>Technical</span> Skills</h2>
+    <div class="skills-grid reveal">
+      <div class="skill-card" data-tilt>
+        <div class="skill-icon"><i class="fa-brands fa-java"></i></div>
+        <span>Java</span>
+        <div class="skill-level"><div class="skill-bar" data-width="85"></div></div>
+      </div>
+      <div class="skill-card" data-tilt>
+        <div class="skill-icon"><i class="fa-brands fa-python"></i></div>
+        <span>Python</span>
+        <div class="skill-level"><div class="skill-bar" data-width="80"></div></div>
+      </div>
+      <div class="skill-card" data-tilt>
+        <div class="skill-icon"><i class="fa-brands fa-html5"></i></div>
+        <span>HTML</span>
+        <div class="skill-level"><div class="skill-bar" data-width="90"></div></div>
+      </div>
+      <div class="skill-card" data-tilt>
+        <div class="skill-icon"><i class="fa-brands fa-css3-alt"></i></div>
+        <span>CSS</span>
+        <div class="skill-level"><div class="skill-bar" data-width="85"></div></div>
+      </div>
+      <div class="skill-card" data-tilt>
+        <div class="skill-icon"><i class="fa-solid fa-database"></i></div>
+        <span>MySQL</span>
+        <div class="skill-level"><div class="skill-bar" data-width="75"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects">
+    <h2 class="section-title reveal"><span>My</span> Projects</h2>
+    <div class="projects-grid reveal">
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-icon"><i class="fa-solid fa-seedling"></i></div>
+          <div class="project-links">
+            <a href="#" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+          </div>
+        </div>
+        <h3>AI-Powered Personal Farming Assistant</h3>
+        <p>Developed an AI-powered farming assistant that provides crop recommendations,
+        weather alerts and pest detection.</p>
+        <div class="project-tags">
+          <span>AI</span><span>Python</span><span>Machine Learning</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <h2 class="section-title reveal"><span>Get In</span> Touch</h2>
+    <div class="contact-grid reveal">
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+          <div>
+            <span class="contact-label">Email</span>
+            <a href="mailto:elisettyompranathi@gmail.com">elisettyompranathi@gmail.com</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+          <div>
+            <span class="contact-label">Phone</span>
+            <a href="tel:+919440506998">+91 9440506998</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
+          <div>
+            <span class="contact-label">Location</span>
+            <p>Amaravati, Andhra Pradesh</p>
+          </div>
+        </div>
+      </div>
+      <div class="contact-actions">
+        <a href="https://www.linkedin.com/in/om-pranathi-459660418" class="social-btn linkedin">
+          <i class="fab fa-linkedin-in"></i> LinkedIn
+        </a>
+        <a href="https://github.com/Ompranathi" class="social-btn github">
+          <i class="fab fa-github"></i> GitHub
+        </a>
+        <a href="resume.pdf" download class="social-btn resume">
+          <i class="fa-solid fa-download"></i> Download Resume
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <p>&copy; 2026 Elisetty Ompranathi | All Rights Reserved</p>
+      <button class="scroll-top" id="scroll-top" aria-label="Scroll to top">
+        <i class="fa-solid fa-chevron-up"></i>
+      </button>
+    </div>
+  </footer>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="auth-config.js"></script>
+<script src="auth.js"></script>
+</body>
+</html>
